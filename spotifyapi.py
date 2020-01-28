@@ -72,7 +72,7 @@ if token:
         song_popularity = result["popularity"]
         list_of_popularity.append(song_popularity)
 
-    fmt = '{:<8}{:<80}{:<35}{:<20}{}'
+    fmt = '{:<8}{:<80}{:<35}{:<15}{}'
     print(color.BOLD + color.RED + color.UNDERLINE + fmt.format('', 'Song', 'Artists', 'Duration',  'Popularity') + color.END)
     for i, (name, artists, dur,  popularity) in enumerate(zip(list_of_song_names, list_of_artist_names, list_of_durations_ms, list_of_popularity)):
         print(fmt.format(i+1, name, artists, conv(dur), str(popularity)+' %'))
