@@ -1,6 +1,6 @@
 <h1 align="center">spotify50</h1>
 
-Get a User's Top 50 Tracks from Spotify and their details.
+Get a User's Top 50 Tracks and their details from Spotify.
 
 ## Screenshot
 
