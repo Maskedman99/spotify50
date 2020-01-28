@@ -1,14 +1,17 @@
 import os
 import json
+import sys
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy.util as util
+
 
 class color:
    RED = '\033[91m'
    BOLD = '\033[1m'
    UNDERLINE = '\033[4m'
    END = '\033[0m'
+
 
 def conv(millis):
     millis = int(millis)
@@ -18,6 +21,15 @@ def conv(millis):
     minutes = int(minutes)
 
     return (str(minutes)+':'+str(seconds))
+
+
+def trange():
+    if len(sys.argv) > 1 and str(sys.argv[1]) == 'recent':
+    	return 'short_term'
+    elif len(sys.argv) > 1 and str(sys.argv[1]) == 'alltime':
+        return 'long_term'
+    else:
+    	return 'medium_term'
 
 
 cid = "your client id"
@@ -37,16 +49,17 @@ token = util.prompt_for_user_token(username, scope)
 if token:
     sp = spotipy.Spotify(auth=token)
     results = sp.current_user_top_tracks(
-        limit=50, offset=0, time_range='medium_term')
+        limit=50, offset=0, time_range=trange())
     for song in range(50):
         list = []
         list.append(results)
         with open('top50_data.json', 'w', encoding='utf-8') as f:
             json.dump(list, f, ensure_ascii=False, indent=4)
+
     with open('top50_data.json') as f:
         data = json.load(f)
-
     list_of_results = data[0]["items"]
+
     list_of_artist_names = []
     list_of_artist_uri = []
     list_of_song_names = []
